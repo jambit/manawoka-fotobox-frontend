@@ -1,0 +1,29 @@
+<div class="container fullscreen with-bg-img" [ngStyle]="{ 'backgroundImage': latestPhoto}">
+  <section *ngIf="editMode">
+    <mat-chip-list aria-orientation="vertical" [selectable]="true">
+      <mat-chip *ngFor="let photoMode of photoModes" [selected]="photoMode.isSelected"
+                class="mat-custom-chip blurred-btn"
+                (selectionChange)="onChipSelected($event)" (click)="selectChip(photoMode.id)">
+        <mat-icon [svgIcon]="photoMode.isSelected ? photoMode.selectedIcon : photoMode.icon"></mat-icon>
+        <br>
+        <p style="font-size: 15px">{{photoMode.label}}</p>
+      </mat-chip>
+    </mat-chip-list>
+  </section>
+
+  <div class="btn-group">
+    <div class="edit-buttons blurred-bg">
+      <button mat-fab color="primary" (click)="displayDeletePopup()" aria-label="delete">
+        <mat-icon svgIcon="trash-can"></mat-icon>
+      </button>
+      <button mat-fab color="primary" (click)="toggleEditMode()" aria-label="edit">
+        <mat-icon svgIcon="edit"></mat-icon>
+      </button>
+    </div>
+    <!-- routerLink="gdpr" -->
+    <button id="btn-forward" mat-fab color="primary" (click)="displayGDPRDialog()" aria-label="forward">
+      <mat-icon svgIcon="arrow"></mat-icon>
+    </button>
+  </div>
+
+</div>

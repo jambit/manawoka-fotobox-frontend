@@ -14,7 +14,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "core": [
+        "dist/core/core",
+        "dist/core"
+      ],
+      "ui-kit": [
+        "dist/ui-kit/ui-kit",
+        "dist/ui-kit"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

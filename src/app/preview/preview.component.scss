@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: flex-end;
+
+}
+
+.btn-group {
+  display: flex;
+  flex-flow: nowrap row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.edit-buttons {
+  button {
+    background-color: white;
+    border-radius: 15%;
+    margin: auto 0 16px 24px;
+  }
+  justify-self: flex-start;
+}
+
+mat-chip.mat-custom-chip {
+  width: 6rem;
+  height: 6rem;
+  border: solid #F07549 2px;
+  background-color: white;
+ // background-color: transparent;
+  // border: solid white 2px;
+  justify-content: center;
+  flex-flow: nowrap column;
+  align-items: center;
+}
+
+.mat-custom-chip.mat-chip-selected {
+  background-color: #F07549 !important;
+  border: none;
+  box-shadow: 0 20px 40px #F07549;
+
+  p {
+    color: white;
+  }
+}
+
+.edit-container {
+  justify-self: flex-start;
+  display: flex;
+  flex-flow: nowrap row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+#btn-forward {
+  justify-self: center !important;
+  margin: auto 24px 16px 24px;
+
+}
+
+section {
+  margin: 16px;
+}

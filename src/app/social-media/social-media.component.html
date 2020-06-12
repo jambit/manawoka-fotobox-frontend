@@ -1,0 +1,32 @@
+<div class="container fullscreen ">
+  <div class="left" [ngStyle]="{ 'backgroundImage': latestPhoto}">
+  </div>
+  <div class="right">
+    <form #form="ngForm" (submit)="onSubmit(socialMedia, username.value, content.value)">
+      <div class="button-group">
+        <button mat-flat-button style="background-color: transparent" (click)="navigateBack()" aria-label="back">
+          <mat-icon svgIcon="back"></mat-icon></button>
+        <button id="submit-btn"[disabled]="form.invalid" type="submit" mat-flat-button color="primary">Posten</button>
+      </div>
+      <section>
+        <mat-chip-list aria-orientation="vertical" [selectable]="true" [multiple]="true" >
+          <mat-chip *ngFor="let media of socialMedia" [selected]="media.isSelected" class="mat-custom-chip blurred-btn" (selectionChange)="onChipSelected($event)" (click)="selectChip(media.id)">
+            <mat-icon [svgIcon]="media.isSelected ? media.selectedIcon : media.icon"></mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </section>
+      <h3>Username</h3>
+      <mat-form-field appearance="outline" color="warn" >
+        <input #username matInput placeholder="username"
+               type="text" name="username"
+               [(ngModel)]="socialMediaContent.userName" (click)="toggleKeyboardOn()" (blur)="toggleKeyboardOff()">
+      </mat-form-field>
+      <h3>Content</h3>
+      <mat-form-field appearance="outline" color="warn" >
+        <textarea #content class="styled-textarea" matNativeControl matInput placeholder="#jambit"
+                  type="text" name="content" [(ngModel)]="socialMediaContent.content" (click)="toggleKeyboardOn()" (blur)="toggleKeyboardOff()">#jambit</textarea>
+      </mat-form-field>
+      <br>
+    </form>
+  </div>
+</div>

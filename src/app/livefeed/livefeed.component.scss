@@ -1,0 +1,39 @@
+@import "projects/ui-kit/src/lib/_colors.scss";
+
+.container {
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: center;
+  justify-content: flex-end;
+  background-position: center;
+  background-color: white;
+
+}
+
+mat-card {
+  background-color: gray;
+  color: white;
+
+  mat-card-subtitle {
+    color: white;
+  }
+}
+
+.mat-card-timer-started {
+  background-color: $primary-orange-hex;
+  opacity: 100%;
+ // color: white;
+}
+
+#timer-btn {
+  margin: 16px auto 16px auto;
+}
+
+#timer-btn:disabled {
+  background-color: $primary-grey-hex;
+}
+
+#label {
+  color: $primary-orange-hex !important;
+  font-size: large;
+}

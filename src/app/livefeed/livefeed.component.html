@@ -1,0 +1,14 @@
+<div class="container fullscreen with-bg-img" [ngStyle]="{ 'backgroundImage': getLivefeed()}">
+  <diV>
+    <h3 id="label">{{label}}</h3>
+  </diV>
+  <mat-card class="blurred" [class.mat-card-timer-started] = "isTimerStarted">
+    <mat-card-content>
+      <mat-card-title>00:0{{remainingTime}}</mat-card-title>
+      <mat-card-subtitle align="center">sec</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+  <button mat-fab id="timer-btn" color="primary" [class.blurred]="isTimerStarted" [disabled]="isTimerStarted" aria-label="Timer" (click)="startTimer()">
+    <mat-icon svgIcon="timer"></mat-icon>
+  </button>
+</div>

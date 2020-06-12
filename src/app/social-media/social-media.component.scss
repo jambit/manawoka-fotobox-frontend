@@ -1,0 +1,129 @@
+@import "projects/ui-kit/src/lib/_colors.scss";
+
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "left right";
+  background-color: white;
+}
+
+.left {
+  grid-area: left;
+  overflow: hidden;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.right {
+  grid-area: right;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-chip.mat-custom-chip {
+  width: 4rem;
+  height: 4rem;
+  border: solid #F07549 2px;
+  // background-color: white;
+  background-color: transparent;
+  // border: solid white 2px;
+  border-radius: 2rem;
+  justify-content: center;
+
+}
+
+.mat-custom-chip.mat-chip-selected{
+
+  &.linkedin {
+    background-color: $primary-grey-hex !important;
+    border: none;
+    box-shadow: 0 20px 40px #F07549;
+  }
+
+}
+
+mat-chip.mat-custom-chip {
+  width: 4rem;
+  height: 4rem;
+  border: solid #F07549 2px;
+  // background-color: white;
+  background-color: transparent;
+  // border: solid white 2px;
+  border-radius: 2rem;
+  justify-content: center;
+
+  &.linkedin {
+    width: 4rem;
+    height: 4rem;
+    border: solid #F07549 2px;
+    // background-color: white;
+    background-color: $primary-orange-hex;
+    // border: solid white 2px;
+    border-radius: 2rem;
+    justify-content: center;
+  }
+
+}
+
+.mat-custom-chip.mat-chip-selected {
+  background-color: #F07549 !important;
+  border: none;
+  box-shadow: 0 20px 40px #F07549;
+}
+
+
+form {
+  background-color: $primary-orange-hex;
+  width: 80%;
+  opacity: 70%;
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+mat-form-field {
+  align-self: stretch;
+  margin: 1rem;
+}
+
+.styled-textarea {
+  height: 20rem;
+  width: 100%;
+  resize: none;
+}
+
+textarea.mat-input-element {
+  color: #3F3D56;
+}
+
+#submit-btn {
+  background-image: $default-gradient;
+  align-self: center;
+  color: white;
+  // font-size: 20px;
+}
+
+.button-group {
+  display: flex;
+  flex-flow: nowrap row;
+  align-self: stretch;
+  justify-content: space-between
+}
+
+h3 {
+  padding: 0 0 0 16px;
+  align-self: flex-start;
+}

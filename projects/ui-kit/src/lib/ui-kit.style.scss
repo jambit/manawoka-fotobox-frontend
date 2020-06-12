@@ -1,0 +1,114 @@
+@import '~@angular/material/theming';
+@import "colors";
+@import "fonts";
+@import "units";
+
+//Material Design Configuration
+$custom-font-config: mat-typography-config(
+  $font-family: $body-font-family,
+  $headline: mat-typography-level($header-text-size, 32px, 700, $header-font-family),
+  $title: mat-typography-level(34px, 32px, 500, $header-font-family),
+  $subheading-2: mat-typography-level(20px, 28px, 500, $header-font-family),
+  $subheading-1: mat-typography-level(20px, 24px, 400, $header-font-family),
+  $body-2: mat-typography-level($body-text-size, 24px, 500),
+  $body-1: mat-typography-level($secondary-text-size, 20px, 300),
+  $button: mat-typography-level($button-size, $button-size, 500),
+);
+
+$card-font-config: mat-typography-config(
+  $font-family: $header-font-family,
+  $headline: mat-typography-level($header-text-size),
+  $title: mat-typography-level(34px, 32px, 1000),
+);
+
+$custom-theme-config: mat-light-theme(mat-palette($primary-orange), mat-palette($primary-grey));
+
+@include mat-core($custom-font-config);
+@include angular-material-theme($custom-theme-config);
+@include mat-card-typography($card-font-config);
+
+//Custom styling
+html, body {
+  height: 100%;
+
+}
+
+body {
+  margin: 0;
+}
+
+button:not([mat-fab]) {
+  border-radius: 0;
+  padding: 16px;
+}
+
+p {
+  text-align: center;
+}
+
+
+.fullscreen {
+  height: 100vh;
+
+  &.with-bg-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+}
+
+.custom-snack-bar {
+  border-radius: 0 !important;
+  color: white;
+  background-image: $default-gradient;
+  opacity: 80% !important;
+}
+
+.custom-popup {
+  border-radius: 0;
+  white-space: pre-line;
+
+  mat-dialog-container {
+    color: black;
+    border-radius: 0;
+    background-color: #f9cbac;
+    opacity: 95%;
+  }
+}
+
+.custom-popup-white {
+  border-radius: 0;
+  white-space: pre-line;
+
+  mat-dialog-container {
+    color: black;
+    border-radius: 0;
+    background-color: white;
+    opacity: 85%;
+  }
+}
+
+.emphasized-orange {
+  color: #FF8555;
+  font-weight: 700;
+}
+
+.blurred {
+  opacity: $opacity-default;
+
+  &-btn {
+    opacity: $opacity-light;
+  }
+
+  &-bg {
+    opacity: $opacity-strong;
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: transparent !important;
+  background-color: white;
+  opacity: 80%;
+  border-radius: 10px;
+}
+
