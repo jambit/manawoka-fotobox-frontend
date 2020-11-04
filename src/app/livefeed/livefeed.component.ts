@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {PhotoboothService} from '../../../projects/core/src/lib/services/photobooth.service';
+import {GDPRComponent} from '../../../projects/ui-kit/src/lib/gdpr/gdpr.component';
+import {MatDialog} from '@angular/material/dialog';
+import {InfoPopupConfig} from '../../../projects/ui-kit/src/lib/info-popup/InfoPopupConfig';
+import {InfoPopupComponent} from '../../../projects/ui-kit/src/lib/info-popup/info-popup.component';
 
 
 @Component({
@@ -16,11 +20,55 @@ export class LivefeedComponent implements OnInit {
   isTimerStarted: boolean;
   label = '';
 
-  constructor(private snackBar: MatSnackBar, private router: Router, private photoboothService: PhotoboothService) {
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router,
+              private photoboothService: PhotoboothService) {
   }
 
   ngOnInit(): void {
+    this.displayGDPRDialog();
     this.resetTimer();
+  }
+
+  displayGDPRDialog() {
+    const gdprDialog = this.dialog.open(GDPRComponent, {panelClass: 'custom-popup'});
+
+    gdprDialog.afterClosed().subscribe(isTermAccepted => {
+      console.log(`Accepted: ${isTermAccepted}`);
+      this.processDSGVO(isTermAccepted);
+    });
+  }
+
+
+  processDSGVO(isTermAccepted: boolean) {
+    if (isTermAccepted !== undefined) {
+      if (isTermAccepted !== true) {
+        this.displayInfoPopup();
+      }
+    } else {
+      console.log('Do it again');
+    }
+  }
+
+  displayInfoPopup() {
+    const popupConfig: InfoPopupConfig = new InfoPopupConfig({
+      title: `Vielen Dank!`,
+      content: `Danke, dass du unseren Service in Anspruch nimmst. \n \nAuf Wiedersehen!`,
+      interval: 4000
+    });
+
+    const popup = this.dialog.open(InfoPopupComponent, {data: popupConfig, panelClass: 'custom-popup'});
+
+    const interval = setInterval(() => {
+      clearInterval(interval);
+      popup.close('closed');
+    }, popupConfig.interval);
+
+    popup.afterClosed().subscribe((result) =>
+      this.navigateBackToHomeScreen());
+  }
+
+  navigateBackToHomeScreen() {
+    this.router.navigate(['home']);
   }
 
   startTimer() {

@@ -13,9 +13,9 @@ export class GDPRComponent implements OnInit {
     '\n' +
     '- Fotos  \n' +
     '\n' +
-    'Die oben genannten Daten werden gespeichert und möglicherweise für die jambit Unternehmenskommunikation genutzt, intern sowie extern z.B. zu Marketingzwecken auf Flyern oder in Sozialen Medien (u.a. Twitter, LinkedIn, Instagram, Facebook u.m.). \n' +
+    'Die oben genannten Daten werden gespeichert und möglicherweise für die jambit Unternehmenskommunikation genutzt (z.B. Küchenmonitore, Confluence, etc.). \n' +
     '\n' +
-    'Sollten weitere Daten benötigt werden, braucht es dafür separat wieder die Zustimmung des Nutzers. Werden die Daten nur intern oder für Flyer benutzt werden diese nach … Jahren gelöscht. Werden die Daten in Sozialen Medien gepostet, unterliegen die Daten den geltenden Social Media Beschränkungen und können möglicherweise nicht gelöscht werden.';
+    'Sollten weitere Daten benötigt werden, braucht es dafür separat wieder die Zustimmung des Nutzers. Die Daten werden nach 5 Jahren gelöscht.';
   secondParagraphSubtitle = 'Widerrufsrecht';
 
   secondParagraphContent = 'Der Nutzer hat das Recht, diese Einwilligung jederzeit ohne Angaben einer Begründung mit Wirkung für die Zukunft zu widerrufen. Hierfür genügt eine E-Mail an communication@jambit.com. Die Rechtmäßigkeit, der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung wird durch den Widerruf nicht berührt.';
@@ -25,7 +25,7 @@ export class GDPRComponent implements OnInit {
 
   fourthParagraphSubtitle = 'Zustimmung durch den Betroffenen';
 
-  fourthParagraphContent = 'Mit der Zustimmung versichern alle, sich auf dem Foto befindlichen, Personen, der Erhebung und der Verarbeitung ihrer Daten durch die jambit GmbH zu den folgenden Zwecken freiwillig zuzustimmen und über die Datenverarbeitung und ihre Rechte belehrt worden zu sein.';
+  fourthParagraphContent = 'Mit der Zustimmung versichern alle, sich auf dem Foto befindlichen, Personen, der Erhebung und der Verarbeitung ihrer Daten durch die jambit GmbH zu den oben genannten Zwecken freiwillig zuzustimmen und über die Datenverarbeitung und ihre Rechte belehrt worden zu sein.';
   constructor() { }
 
   ngOnInit(): void {

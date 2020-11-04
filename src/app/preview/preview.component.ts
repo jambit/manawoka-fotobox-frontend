@@ -1,12 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {GDPRComponent} from '../../../projects/ui-kit/src/lib/gdpr/gdpr.component';
 import {Router} from '@angular/router';
 import {PopupComponent} from '../../../projects/ui-kit/src/lib/popup/popup.component';
 import {PopupConfig, PopupType} from '../../../projects/ui-kit/src/lib/popup/PopupConfig';
 import {PhotoboothService} from '../../../projects/core/src/lib/services/photobooth.service';
-import {SocialMediaContent} from '../../../projects/core/src/lib/models/SocialMediaContent';
-import {SocialMediaPlatform} from '../social-media/social-media.component';
 import {MatChipSelectionChange} from '@angular/material/chips/chip';
 import {InfoPopupConfig} from '../../../projects/ui-kit/src/lib/info-popup/InfoPopupConfig';
 import {InfoPopupComponent} from '../../../projects/ui-kit/src/lib/info-popup/info-popup.component';
@@ -35,8 +33,22 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.photoModes = [this.defaultPhotoMode, this.jambitLogoPhotoMode];
-    this.getLatestPhoto();
+    const popupConfig: InfoPopupConfig = new InfoPopupConfig({
+      title: `Verarbeitet...`,
+      content: `Bitte warte einen Moment \n \nDeine Anfrage wird verarbeitet.`,
+      interval: 4000
+    });
+
+    const popup = this.dialog.open(LoadingSpinnerComponent, {data: popupConfig, panelClass: 'custom-popup-white'});
+    const interval = setInterval(() => {
+      clearInterval(interval);
+      popup.close('closed');
+    }, popupConfig.interval);
+
+    popup.afterClosed().subscribe((result) =>
+      this.getLatestPhoto());
   }
+
 
   getLatestPhoto() {
     if (!this.photoModes[1].isSelected) {
@@ -111,7 +123,7 @@ export class PreviewComponent implements OnInit {
 
     gdprDialog.afterClosed().subscribe(isTermAccepted => {
       console.log(`Accepted: ${isTermAccepted}`);
-      this.processPicture(isTermAccepted);
+      //  this.processPicture(isTermAccepted);
     });
   }
 
@@ -119,7 +131,7 @@ export class PreviewComponent implements OnInit {
     const popupConfig: InfoPopupConfig = new InfoPopupConfig({
       title: `Verarbeitet...`,
       content: `Bitte warte einen Moment \n \nWir sind dabei, deine Anfrage zu verarbeiten`,
-      interval: 15000
+      interval: 20000
     });
 
     const popup = this.dialog.open(LoadingSpinnerComponent, {data: popupConfig, panelClass: 'custom-popup-white'});
@@ -128,18 +140,24 @@ export class PreviewComponent implements OnInit {
       clearInterval(interval);
       popup.close('closed');
     }, popupConfig.interval);
+    let remainingTime = 5;
 
-    popup.afterClosed().subscribe((result) =>
-      this.getLatestPhoto());
+    popup.afterClosed().subscribe((result) => {
+      const test = setInterval(() => {
+        remainingTime = remainingTime - 1;
+        if (remainingTime === 0) {
+          clearInterval(test);
+          this.getLatestPhoto();
+        } else {
+          this.getLatestPhoto();
+        }
+      }, 1000);
+    });
   }
 
 
-  processPicture(isTermAccepted: boolean) {
-    if (isTermAccepted !== undefined) {
-      isTermAccepted ? this.displaySocialMediaComponent() : this.displayDeletePopup();
-    } else {
-      console.log('Do it again');
-    }
+  processPicture() {
+    this.displaySavePopup();
   }
 
   displaySocialMediaComponent() {
@@ -148,6 +166,22 @@ export class PreviewComponent implements OnInit {
       photoEdited = photoMode.isSelected && photoMode.id === 2;
     });
     this.router.navigate(['social-media-preview'], {state: {isPhotoEdited: photoEdited}});
+  }
+
+  displaySavePopup() {
+    const popupConfig: PopupConfig = new PopupConfig({
+      type: PopupType.ACCEPT,
+      title: 'Dein Bild speichern?',
+      content: 'Dieses Bild wird gespeichert und für den und möglicherweise für interne Zwecke verwendet.',
+      yesButtonLabel: 'Speichern',
+      noButtonLabel: 'Sofort löschen'
+    });
+    const deletePopup = this.dialog.open(PopupComponent, {data: popupConfig, panelClass: 'custom-popup'});
+
+    deletePopup.afterClosed().subscribe(shouldBesaved => {
+      //   console.log(`Should be deleted: ${shouldBeDeleted}`);
+      shouldBesaved ? console.log('do it again') : this.displayDeletePopup();
+    });
   }
 
   displayDeletePopup() {
