@@ -10,7 +10,7 @@ import {InfoPopupConfig} from '../../../projects/ui-kit/src/lib/info-popup/InfoP
 import {InfoPopupComponent} from '../../../projects/ui-kit/src/lib/info-popup/info-popup.component';
 import {LoadingSpinnerComponent} from '../../../projects/ui-kit/src/lib/loading-spinner/loading-spinner.component';
 
-const DOCKER_URL = 'http://localhost:8082';
+const DOCKER_URL = 'http://localhost/images';
 
 @Component({
   selector: 'app-preview',

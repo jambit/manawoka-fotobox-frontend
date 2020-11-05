@@ -31,10 +31,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
  - build the latest version of the project without the `--prod` flag !!!
  - run `docker build -t fotobox:latest .`
+ - run `docker build buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t fotobox:latest .`
  - save dockerimage as .tar file `docker save -o ./fotobox.tar fotobox:latest`
  - copy the file `fotobox.tar` on the RaspberryPi
  
 #### on the RaspberryPi: 
  
  - load the docker image from the tar file: ` docker load -i <path to image tar file>`
- - run the docker container: `docker run -p 80:80 fotobox:latest`
+ - run the docker container: `docker run -p 80:80 -v /media/pi/382E1C5B2E1C150A/pictures:/www/data fotobox:latest`
